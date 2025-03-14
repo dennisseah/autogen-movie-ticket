@@ -28,7 +28,7 @@ After all tasks are complete, Provide your response in a JSON format.
 {
     "movie_name": "<movie name>",
     "num_tickets": <number of tickets>,
-    "date": "<date of the movie>",
+    "date": "<date of the movie>", # e.g. 02/25 where 2 is the month and 25 is the day
     "time": "<time of the movie>"
 }
 ```
