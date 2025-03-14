@@ -23,6 +23,7 @@ def get_movie(name: str) -> Movie | None:
     return None if the movie name is not found.
     """
     for movie in movies:
+        # fuzzy matching can be implemented here
         if movie.movie_name.lower().find(name.lower()) != -1:
             return movie
     return None
@@ -40,7 +41,7 @@ def is_movie(name: str) -> str | None:
     return movie.movie_name if movie else None
 
 
-def verify_ticket_count(movie_name: str | None, ticket_count: str) -> int | None:
+def verify_ticket_count(movie_name: str | None, ticket_count: int) -> int | None:
     """Verify if the given ticket count is valid.
     if yes, return the exact ticket count.
 
@@ -49,16 +50,13 @@ def verify_ticket_count(movie_name: str | None, ticket_count: str) -> int | None
     :return: The exact ticket count if the given ticket count is valid.
     return None if the given ticket count is invalid.
     """
-    try:
-        count = int(ticket_count)
-        if count > 0 and count < 10:
-            if movie_name:
-                movie = get_movie(movie_name)
-                if movie:
-                    if count > movie.num_tickets:
-                        return count
-                    raise ValueError("Ticket count exceeds the available tickets.")
-            return count
+    if ticket_count > 0 and ticket_count < 10:
+        if movie_name:
+            movie = get_movie(movie_name)
+            if movie:
+                if ticket_count <= movie.num_tickets:
+                    return ticket_count
+                raise ValueError("Ticket count exceeds the available tickets.")
+        return ticket_count
 
-    except ValueError:
-        raise ValueError("Invalid ticket count.")
+    raise ValueError("Ticket count should be between 1 and 9.")

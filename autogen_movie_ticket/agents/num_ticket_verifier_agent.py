@@ -7,7 +7,7 @@ system_message = """You are an agent who can provide verified the number of tick
 Response with the number of tickets if the given number is valid in this json format:
 ```json
 {
-    "ticket_count": "<number of tickets>"
+    "ticket_count": <number of tickets>
 }
 ```
 

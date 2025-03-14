@@ -1,9 +1,11 @@
+import argparse
 import asyncio
 
 from autogen_agentchat.agents import UserProxyAgent
+from autogen_agentchat.base import TaskResult
 from autogen_agentchat.conditions import TextMentionTermination
+from autogen_agentchat.messages import TextMessage
 from autogen_agentchat.teams import SelectorGroupChat
-from autogen_agentchat.ui import Console
 
 from autogen_movie_ticket.agents.customer_agent import get_agent as get_customer_agent
 from autogen_movie_ticket.agents.movie_name_agent import (
@@ -31,6 +33,18 @@ Only select one agent.
 """
 
 
+def get_message() -> str:
+    parser = argparse.ArgumentParser(prog="Movie Ticket Booking")
+    parser.add_argument(
+        "-m",
+        "--message",
+        type=str,
+        required=True,
+    )
+    args = parser.parse_args()
+    return args.message
+
+
 async def main():
     customer_agent = get_customer_agent(llm_client)
     movie_name_agent = get_movie_name_agent(llm_client)
@@ -46,13 +60,20 @@ async def main():
         allow_repeated_speaker=True,  # Allow an agent to speak multiple turns in a row.
     )
 
-    result = await Console(
-        team.run_stream(
-            task="Hello",
-        )
-    )
+    # result = await Console(
+    #     team.run_stream(
+    #         task=get_message(),
+    #     )
+    # )
 
-    for message in result.messages:
+    messages = []
+    async for message in team.run_stream(task=get_message()):
+        if not TaskResult:
+            messages.append(message)
+        if isinstance(message, TextMessage):
+            print(message.content)
+
+    for message in messages:
         if message.models_usage:
             print(f"{message.source}: {message.models_usage}")
 
