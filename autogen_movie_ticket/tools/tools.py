@@ -8,7 +8,7 @@ logger = container[logging.Logger]
 movies = [
     Movie(movie_name="The Shawshank Redemption", num_tickets=10),
     Movie(movie_name="The Godfather", num_tickets=20),
-    Movie(movie_name="The Dark Knight", num_tickets=10),
+    Movie(movie_name="The Dark Knight", num_tickets=1),
     Movie(movie_name="The Lord of the Rings: The Return of the King", num_tickets=10),
     Movie(movie_name="Pulp Fiction", num_tickets=10),
     Movie(movie_name="Schindler's List", num_tickets=10),
@@ -57,6 +57,9 @@ def verify_ticket_count(movie_name: str | None, ticket_count: int) -> int | None
                 if ticket_count <= movie.num_tickets:
                     return ticket_count
                 raise ValueError("Ticket count exceeds the available tickets.")
+
+        # return ticket count if movie not found
+        # agent will come back with the movie name
         return ticket_count
 
     raise ValueError("Ticket count should be between 1 and 9.")

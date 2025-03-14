@@ -47,6 +47,5 @@ omit = [
     "autogen_movie_ticket/hosting.py",
     "autogen_movie_ticket/protocols/*",
     "autogen_movie_ticket/main.py",
-    "autogen_movie_ticket/agents/*.py",
-    "autogen_movie_ticket/tools/*.py"
+    "autogen_movie_ticket/agents/*.py"
 ]
