@@ -24,7 +24,7 @@ def get_agent(llm_client: AzureOpenAIChatCompletionClient) -> AssistantAgent:
     return AssistantAgent(
         "num_ticket_verifier_agent",
         model_client=llm_client,
-        description="Movie name agent.",
+        description="number of ticket verifier agent.",
         tools=[verify_ticket_count],
         system_message=system_message,
     )

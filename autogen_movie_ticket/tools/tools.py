@@ -6,12 +6,36 @@ from autogen_movie_ticket.models.movie import Movie
 logger = container[logging.Logger]
 
 movies = [
-    Movie(movie_name="The Shawshank Redemption", num_tickets=10),
-    Movie(movie_name="The Godfather", num_tickets=20),
-    Movie(movie_name="The Dark Knight", num_tickets=1),
-    Movie(movie_name="The Lord of the Rings: The Return of the King", num_tickets=10),
-    Movie(movie_name="Pulp Fiction", num_tickets=10),
-    Movie(movie_name="Schindler's List", num_tickets=10),
+    Movie(
+        movie_name="The Shawshank Redemption",
+        num_tickets=10,
+        available_date=["03/10", "03/11", "03/12", "03/13", "03/14"],
+    ),
+    Movie(
+        movie_name="The Godfather",
+        num_tickets=20,
+        available_date=["03/10", "03/11", "03/12", "03/13", "03/14"],
+    ),
+    Movie(
+        movie_name="The Dark Knight",
+        num_tickets=1,
+        available_date=["03/13", "03/14"],
+    ),
+    Movie(
+        movie_name="The Lord of the Rings: The Return of the King",
+        num_tickets=10,
+        available_date=["03/10", "03/11"],
+    ),
+    Movie(
+        movie_name="Pulp Fiction",
+        num_tickets=10,
+        available_date=["03/10", "03/11", "03/12", "03/13", "03/14"],
+    ),
+    Movie(
+        movie_name="Schindler's List",
+        num_tickets=10,
+        available_date=["03/10", "03/11", "03/12", "03/13", "03/14"],
+    ),
 ]
 
 
@@ -63,3 +87,15 @@ def verify_ticket_count(movie_name: str | None, ticket_count: int) -> int | None
         return ticket_count
 
     raise ValueError("Ticket count should be between 1 and 9.")
+
+
+def available_date(movie_name: str) -> str | None:
+    """Return the available date for the given movie name.
+
+    :param movie_name: The movie name.
+    :return: The available dates for the given movie name.
+    """
+    movie = get_movie(movie_name)
+    if movie:
+        return ", ".join(movie.available_date)
+    return None
