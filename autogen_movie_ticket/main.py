@@ -52,7 +52,7 @@ def get_arg_params() -> dict[str, str | bool]:
     return {"message": args.message, "dev": args.dev}
 
 
-async def main(dev: bool):
+def get_team() -> SelectorGroupChat:
     customer_agent = get_customer_agent(llm_client)
     movie_name_agent = get_movie_name_agent(llm_client)
     num_ticket_verifier_agent = get_num_ticket_verifier_agent(llm_client)
@@ -60,7 +60,7 @@ async def main(dev: bool):
     user_proxy = UserProxyAgent("user_proxy", input_func=input)
 
     termination = TextMentionTermination("TERMINATE")
-    team = SelectorGroupChat(
+    return SelectorGroupChat(
         [
             customer_agent,
             movie_name_agent,
@@ -73,6 +73,10 @@ async def main(dev: bool):
         selector_prompt=selector_prompt,
         allow_repeated_speaker=True,  # Allow an agent to speak multiple turns in a row.
     )
+
+
+async def main(dev: bool):
+    team = get_team()
     arg_params = get_arg_params()
 
     if arg_params["dev"]:
