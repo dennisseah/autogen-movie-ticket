@@ -3,9 +3,7 @@ from autogen_ext.models.openai import AzureOpenAIChatCompletionClient
 
 from autogen_movie_ticket.tools.tools import available_dates
 
-system_message = """You are an agent who provide a list of available dates of movie.
-```
-"""  # noqa E501
+system_message = "You are an agent who provide a list of available dates of movie."
 
 
 def get_agent(llm_client: AzureOpenAIChatCompletionClient) -> AssistantAgent:
