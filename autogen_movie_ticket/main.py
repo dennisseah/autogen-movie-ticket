@@ -74,15 +74,14 @@ async def main(dev: bool):
         allow_repeated_speaker=True,  # Allow an agent to speak multiple turns in a row.
     )
     arg_params = get_arg_params()
-    print(arg_params)
 
     if arg_params["dev"]:
-        results = await Console(
+        result = await Console(
             team.run_stream(
                 task=str(arg_params["message"]),
             )
         )
-        for message in results.messages:
+        for message in result.messages:
             if message.models_usage:
                 print(f"{message.source}: {message.models_usage}")
 
