@@ -1,7 +1,12 @@
-from autogen_movie_ticket.models.movie import Movie
+from autogen_movie_ticket.models.movie import Movie, MovieDate
 
 
 def test_movie_init():
-    movie = Movie(movie_name="The Matrix", num_tickets=2)
+    movie = Movie(
+        movie_name="The Matrix",
+        num_tickets=2,
+        available_dates=[MovieDate(type="2D", date="02/25")],
+    )
     assert movie.movie_name == "The Matrix"
     assert movie.num_tickets == 2
+    assert movie.available_dates == [MovieDate(type="2D", date="02/25")]

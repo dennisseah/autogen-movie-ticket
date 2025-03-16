@@ -39,3 +39,21 @@ def test_generation_result_build():
     assert results.usages[1].agent_name == "agent2"
     assert results.usages[1].prompt_tokens == 15
     assert results.usages[1].completion_tokens == 25
+
+
+def test_generation_result_show():
+    results = GenerationResult(
+        stop_reason="stop",
+        usages=[
+            Usage(agent_name="agent1", prompt_tokens=10, completion_tokens=20),
+            Usage(agent_name="agent2", prompt_tokens=15, completion_tokens=25),
+        ],
+    )
+
+    assert results.show() == (
+        """Stop reason: stop
+Agent Name      Prompt Tokens    Completion Tokens
+------------  ---------------  -------------------
+agent1                     10                   20
+agent2                     15                   25"""
+    )
