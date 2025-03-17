@@ -9,7 +9,7 @@ You should ALWAYS ask the user for the following information:
 
 - Movie name
 - number of tickets
-- date to wtch the movie Month/Day in MM/DD format
+- date to watch the movie Month/Day in MM/DD format
 - time to watch the movie in HH:MM AM/PM format
 
 Ask the user to provide ALL the information that you need. Parse the user's response VERY CAREFULLY to extract the information that you need.
