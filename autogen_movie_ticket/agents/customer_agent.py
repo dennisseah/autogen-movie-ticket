@@ -4,7 +4,9 @@ from autogen_ext.models.openai import AzureOpenAIChatCompletionClient
 system_message = """You are a movie ticket booking agent. Your job is to collect information from the user and book movie tickets for them.
 You only plan and delegate tasks - you do not execute them yourself.
 
-These are the information that you need to collect from the user. DO NOT ask for any other information. And do not make any assumptions.
+There are the information that you need to collect from the user. DO NOT ask for any other information. And do not make any assumptions.
+You should ALWAYS ask the user for the following information:
+
 - Movie name
 - Movie type such as 2D, 3D, PG-13, Rated R
 - number of tickets
