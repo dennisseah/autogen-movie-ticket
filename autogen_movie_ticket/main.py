@@ -18,9 +18,6 @@ from autogen_movie_ticket.agents.movie_name_agent import (
 from autogen_movie_ticket.agents.movie_times_agent import (
     get_agent as get_movie_times_agent,
 )
-from autogen_movie_ticket.agents.movie_type_agent import (
-    get_agent as get_movie_type_agent,
-)
 from autogen_movie_ticket.agents.num_ticket_verifier_agent import (
     get_agent as get_num_ticket_verifier_agent,
 )
@@ -64,7 +61,6 @@ def get_team() -> SelectorGroupChat:
     num_ticket_verifier_agent = get_num_ticket_verifier_agent(llm_client)
     movie_dates_agent = get_movie_dates_agent(llm_client)
     movie_times_agent = get_movie_times_agent(llm_client)
-    movie_type_agent = get_movie_type_agent(llm_client)
     user_proxy = UserProxyAgent("user_proxy", input_func=input)
 
     termination = TextMentionTermination("TERMINATE")
@@ -75,7 +71,6 @@ def get_team() -> SelectorGroupChat:
             num_ticket_verifier_agent,
             movie_dates_agent,
             movie_times_agent,
-            movie_type_agent,
             user_proxy,
         ],
         model_client=llm_client,

@@ -25,6 +25,7 @@ class AzureOpenAIService(IAzureOpenAIService):
                 api_key=self.env.azure_openai_api_key,
                 model=self.env.azure_openai_deployed_model_name,
                 api_version=self.env.azure_openai_api_version,
+                temperature=0.7,
             )
 
         azure_ad_token = (

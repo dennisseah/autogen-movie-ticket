@@ -2,7 +2,7 @@ import pytest
 
 from autogen_movie_ticket.tools.tools import (
     available_dates,
-    available_movie_types,
+    available_times,
     get_movie,
     is_movie,
     verify_ticket_count,
@@ -34,11 +34,11 @@ def test_verify_ticket_count():
         verify_ticket_count("dark knight", 3)
 
 
-def test_available_movie_types():
-    assert available_movie_types("godfather") == "2D, 3D, PG-13"
-    assert not available_movie_types("godfather 2")
-
-
 def test_available_dates():
-    assert available_dates("godfather", "2D") == "03/10, 03/11, 03/12, 03/13, 03/14"
-    assert not available_dates("godfather 2", "2D")
+    assert available_dates("godfather") == "'03/10', '03/11', '03/12', '03/13', '03/14'"
+    assert not available_dates("godfather 2")
+
+
+def test_available_times():
+    assert available_times("godfather") == "'11:00 AM', '2:30 PM', '4:00 PM', '8:00 PM'"
+    assert not available_times("godfather 2")
