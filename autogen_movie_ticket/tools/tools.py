@@ -23,6 +23,7 @@ movies = [
             MovieDate(type="PG-13", date="03/13"),
             MovieDate(type="PG-13", date="03/14"),
         ],
+        available_times=["10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM"],
     ),
     Movie(
         movie_name="The Godfather",
@@ -41,6 +42,7 @@ movies = [
             MovieDate(type="PG-13", date="03/13"),
             MovieDate(type="PG-13", date="03/14"),
         ],
+        available_times=["11:00 AM", "2:30 PM", "4:00 PM", "8:00 PM"],
     ),
     Movie(
         movie_name="The Dark Knight",
@@ -60,6 +62,7 @@ movies = [
             MovieDate(type="PG-13", date="03/13"),
             MovieDate(type="PG-13", date="03/14"),
         ],
+        available_times=["11:00 AM", "2:30 PM", "4:00 PM", "8:00 PM"],
     ),
     Movie(
         movie_name="The Lord of the Rings: The Return of the King",
@@ -74,6 +77,7 @@ movies = [
             MovieDate(type="PG-13", date="03/13"),
             MovieDate(type="PG-13", date="03/14"),
         ],
+        available_times=["11:00 AM", "2:30 PM", "4:00 PM", "8:00 PM"],
     ),
     Movie(
         movie_name="Pulp Fiction",
@@ -88,6 +92,7 @@ movies = [
             MovieDate(type="PG-13", date="03/13"),
             MovieDate(type="PG-13", date="03/14"),
         ],
+        available_times=["11:00 AM", "2:30 PM", "4:00 PM", "8:00 PM"],
     ),
     Movie(
         movie_name="Schindler's List",
@@ -102,6 +107,7 @@ movies = [
             MovieDate(type="PG-13", date="03/13"),
             MovieDate(type="PG-13", date="03/14"),
         ],
+        available_times=["11:00 AM", "2:30 PM", "4:00 PM", "8:00 PM"],
     ),
 ]
 
@@ -172,7 +178,7 @@ def available_movie_types(movie_name: str) -> str | None:
 
 
 def available_dates(movie_name: str, movie_type: str) -> str | None:
-    """Return the available date for the given movie name.
+    """Return the available dates for the given movie name and movie type.
 
     :param movie_name: The movie name.
     :param movie_type: The movie type.
@@ -183,4 +189,18 @@ def available_dates(movie_name: str, movie_type: str) -> str | None:
         dates = [date.date for date in movie.available_dates if date.type == movie_type]
         dates.sort()
         return ", ".join(dates)
+    return None
+
+
+def available_times(movie_name: str) -> str | None:
+    """Return the available times for the given movie name.
+
+    :param movie_name: The movie name.
+    :return: The available times for the given movie.
+    """
+    movie = get_movie(movie_name)
+    if movie:
+        times = [t for t in movie.available_times]
+        times.sort()
+        return "'" + ", '".join(times) + "'"
     return None

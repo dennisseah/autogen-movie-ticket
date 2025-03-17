@@ -14,3 +14,4 @@ class Movie(BaseModel):
     movie_name: str
     num_tickets: int
     available_dates: list[MovieDate]
+    available_times: list[str]
