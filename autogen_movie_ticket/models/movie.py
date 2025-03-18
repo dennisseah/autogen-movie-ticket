@@ -6,3 +6,4 @@ class Movie(BaseModel):
     num_tickets: int
     available_dates: list[str]
     available_times: list[str]
+    theaters: list[str] = ["AMC", "Regal", "Cinemark"]

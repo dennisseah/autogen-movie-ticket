@@ -17,6 +17,7 @@ movies = [
         num_tickets=20,
         available_dates=["03/10", "03/11", "03/12", "03/13", "03/14"],
         available_times=["11:00 AM", "2:30 PM", "4:00 PM", "8:00 PM"],
+        theaters=["AMC", "Regal", "Cinemark", "Cineplex", "Cinepolis"],
     ),
     Movie(
         movie_name="The Dark Knight",
@@ -96,11 +97,10 @@ def verify_ticket_count(movie_name: str | None, ticket_count: int) -> int | None
 
 
 def available_dates(movie_name: str) -> str | None:
-    """Return the available dates for the given movie name and movie type.
+    """Return the available dates for the given movie name.
 
     :param movie_name: The movie name.
-    :param movie_type: The movie type.
-    :return: The available dates for the given movie and type.
+    :return: The available dates for the given movie.
     """
     movie = get_movie(movie_name)
     if movie:
@@ -121,4 +121,18 @@ def available_times(movie_name: str) -> str | None:
         times = [t for t in movie.available_times]
         times.sort()
         return "'" + "', '".join(times) + "'"
+    return None
+
+
+def available_theatres(movie_name: str) -> str | None:
+    """Return the available theatres for the given movie name.
+
+    :param movie_name: The movie name.
+    :return: The available theatres for the given movie.
+    """
+    movie = get_movie(movie_name)
+    if movie:
+        theatres = [t for t in movie.theaters]
+        theatres.sort()
+        return "'" + "', '".join(theatres) + "'"
     return None
